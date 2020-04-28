@@ -151,7 +151,7 @@ function Clique:EnableFrames()
 end	   
 
 function Clique:SpellBookButtonPressed(frame, button)
-    local id = SpellBook_GetSpellID(this:GetParent():GetID());
+    local id = SpellBook_GetSpellIDIndex(this:GetParent():GetID());
     local texture = GetSpellTexture(id, SpellBookFrame.bookType)
     local name, rank = GetSpellName(id, SpellBookFrame.bookType)
 
@@ -741,4 +741,9 @@ function Clique:ADDON_LOADED(event, addon)
     if addon == "Blizzard_ArenaUI" then
         self:EnableArenaFrames()
     end
+end
+
+function SpellBook_GetSpellIDIndex(id)
+	local index = spellbookCustomRender[SpellBookFrame.selectedSkillLine][id].spellIndex
+	return index
 end
