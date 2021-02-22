@@ -744,6 +744,12 @@ function Clique:ADDON_LOADED(event, addon)
 end
 
 function SpellBook_GetSpellIDIndex(id)
-	local index = spellbookCustomRender[SpellBookFrame.selectedSkillLine][id].spellIndex
+	local currentPage, maxPages = SpellBook_GetCurrentPage();
+	if (currentPage) then
+		currentPage = currentPage - 1;
+	end
+	local offset = (currentPage or 0)*NUM_COMPANIONS_PER_PAGE;
+	
+	local index = spellbookCustomRender[SpellBookFrame.selectedSkillLine][id + offset].spellIndex
 	return index
 end
